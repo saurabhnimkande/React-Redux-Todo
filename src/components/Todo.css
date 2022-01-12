@@ -1,0 +1,20 @@
+.title {
+  color: black;
+  text-decoration: none;
+}
+.title:visited {
+  text-decoration: none;
+  color: black;
+}
+.title:focus {
+  text-decoration: none;
+  color: black;
+}
+.title:active {
+  text-decoration: none;
+  color: black;
+}
+.title:hover {
+  text-decoration: none;
+  color: black;
+}
