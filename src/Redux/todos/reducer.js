@@ -1,3 +1,4 @@
+import { loadData, saveData } from "../../utils/localStorage";
 import {
   ADD_TODO,
   ADD_TODO_ERROR,
@@ -11,8 +12,11 @@ import {
   TOGGLE_TODO,
 } from "./actionTypes";
 
-const init = { loading: false, todos: [], error: false };
-
+const init = loadData("todos") || {
+  loading: false,
+  todos: [] || [],
+  error: false,
+};
 export const reducer = (state = init, { type, payload }) => {
   switch (type) {
     case ADD_TODO:
@@ -40,10 +44,12 @@ export const reducer = (state = init, { type, payload }) => {
       fetch(`http://localhost:3001/todos/${payload}`, {
         method: "DELETE",
       });
-      return {
+      let removeObject = {
         ...state,
         todos: state.todos.filter((e) => e.id !== payload),
       };
+      saveData("todos", removeObject);
+      return removeObject;
     case EDIT_TODO:
       fetch(`http://localhost:3001/todos/${payload.id}`, {
         method: "PATCH",
@@ -54,23 +60,27 @@ export const reducer = (state = init, { type, payload }) => {
           "Content-Type": "application/json",
         },
       });
-      return {
+      let editObject = {
         ...state,
         todos: state.todos.map((e) =>
           e.id === payload.id ? { ...e, title: payload.value.current } : e
         ),
       };
+      saveData("todos", editObject);
+      return editObject;
     case ADD_TODO_LOADING:
       return {
         ...state,
-        loading: true,
+        loading: false,
       };
     case ADD_TODO_SUCCESS:
-      return {
+      let addObject = {
         ...state,
         todos: [...state.todos, payload],
         loading: false,
       };
+      saveData("todos", addObject);
+      return addObject;
     case ADD_TODO_ERROR:
       return {
         ...state,

@@ -11,17 +11,18 @@ import {
   getTodoSuccess,
   removeTodo,
   toggleTodo,
-} from "../Redux/Actions";
+} from "../Redux/todos/actions";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import { Total } from "./Total";
+import { loginFailed } from "../Redux/auth/actions";
 
 export const Todo = () => {
   const dispatch = useDispatch();
   const { loading, todos, error } = useSelector((state) => ({
-    loading: state.loading,
-    todos: state.todos,
-    error: state.error,
+    loading: state.todoReducer.loading,
+    todos: state.todoReducer.todos,
+    error: state.todoReducer.error,
   }));
   const value = useRef("");
   const getData = () => {
@@ -42,6 +43,16 @@ export const Todo = () => {
     <h1>error</h1>
   ) : (
     <div>
+      <Link to="/login">
+        <button
+          onClick={() => {
+            localStorage.removeItem("authLogin");
+            dispatch(loginFailed("return"));
+          }}
+        >
+          Logout
+        </button>
+      </Link>
       <Total></Total>
       <input
         placeholder="Enter Todo"

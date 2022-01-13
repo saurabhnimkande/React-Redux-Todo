@@ -1,19 +1,9 @@
 {
   "todos": [
     {
-      "title": "Learn React-Redux",
-      "status": true,
-      "id": 1
-    },
-    {
       "title": "Learn Redux",
       "status": true,
       "id": 2
-    },
-    {
-      "title": "Hi",
-      "status": true,
-      "id": 3
     }
   ]
 }

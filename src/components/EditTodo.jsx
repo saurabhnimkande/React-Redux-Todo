@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { editTodo } from "../Redux/Actions";
+import { editTodo } from "../Redux/todos/actions";
 
 export const EditTodo = () => {
   const dispatch = useDispatch();
