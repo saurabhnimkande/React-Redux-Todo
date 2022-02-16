@@ -2,7 +2,7 @@
   "todos": [
     {
       "title": "Learn Redux",
-      "status": true,
+      "status": false,
       "id": 2
     }
   ]
